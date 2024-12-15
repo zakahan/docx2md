@@ -2,7 +2,6 @@ package docx_parser
 
 import (
 	"fmt"
-	"github.com/google/uuid"
 	"log"
 	"os"
 	"path/filepath"
@@ -23,8 +22,9 @@ func CreateMdDir(documentPath string, outputDir string, suffix string) (string, 
 	}
 	// --------------------------------
 	// 创建uuid路径
-	uuidStr := uuid.New().String()
-	mdDirPath := filepath.Join(outputDir, uuidStr)
+	//uuidStr := uuid.New().String()
+	//mdDirPath := filepath.Join(outputDir, uuidStr)
+	mdDirPath := outputDir
 	mdPath := filepath.Join(mdDirPath, mdName)
 	// 检查路径是否存在，如果不存在则创建
 	err := os.MkdirAll(mdDirPath, 0755)
