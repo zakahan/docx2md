@@ -52,6 +52,13 @@ func ReadDocx(filePath string, outputFileDir string) (*Document, error) {
 	}
 
 	/* ----------------------------------------------------------------------------- */
+	// 解析style文件
+	stylesList, err := ReadStyle(r, filePath)
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println(stylesList)
+	/* ----------------------------------------------------------------------------- */
 
 	// 查找 document.xml
 	var documentFile *zip.File
@@ -134,5 +141,7 @@ func ReadDocx(filePath string, outputFileDir string) (*Document, error) {
 		}
 	}
 
+	// 结合styles和body，修改font size
+	stylizedBody(&body, stylesList)
 	return &Document{Body: body}, nil
 }

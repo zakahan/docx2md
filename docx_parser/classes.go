@@ -16,8 +16,13 @@ type Body struct {
 }
 
 type Paragraph struct { // 段落类型 w:p
-	Runs  []Run `xml:"r"`         // 段落包含多个 run
-	NumPr *bool `xml:"pPr>numPr"` // 检查是否存在编号信息
+	Runs    []Run  `xml:"r"`          // 段落包含多个 run
+	NumPr   *bool  `xml:"pPr>numPr"`  // 检查是否存在编号信息
+	StyleId PStyle `xml:"pPr>pStyle"` // 段落样式
+}
+
+type PStyle struct { // 段落样式
+	Value string `xml:"val,attr"`
 }
 
 type Run struct { // 文本运行，可能包含文本或图片
@@ -69,4 +74,22 @@ type Relationship struct {
 	Id     string `xml:"Id,attr"`
 	Type   string `xml:"Type,attr"`
 	Target string `xml:"Target,attr"`
+}
+
+/* -------------------------------------------------------------- */
+
+// Styles 样式表
+type Styles struct {
+	XMLName   xml.Name
+	StyleList []Style `xml:"style"`
+}
+
+type Style struct {
+	Name     Name     `xml:"name"`
+	StyleId  string   `xml:"styleId,attr"`
+	FontSize FontSize `xml:"rPr>sz"`
+}
+
+type Name struct {
+	Value string `xml:"val,attr"`
 }
