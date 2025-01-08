@@ -57,7 +57,7 @@ func ReadDocx(filePath string, outputFileDir string) (*Document, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(stylesList)
+
 	/* ----------------------------------------------------------------------------- */
 
 	// 查找 document.xml
